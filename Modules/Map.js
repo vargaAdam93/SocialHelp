@@ -42,7 +42,6 @@ export default class MyMap extends Component{
 
             const myCoord = {latitude: this.state.myPosition.coords.latitude,
                              longitude: this.state.myPosition.coords.longitude};
-            alert(this.state.markers.length);
             return (
                 <View style={styles_map.container}>
                     <MapView style={styles_map.map}
