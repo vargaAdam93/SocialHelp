@@ -30,7 +30,7 @@ class HomeScreen extends Component {
     handleGoogleLogin(event)
     {
         this.setState({
-            logged_in: true
+            logged_in:true
         });
     }
 
