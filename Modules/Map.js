@@ -21,7 +21,7 @@ export default class MyMap extends Component{
         navigator.geolocation.getCurrentPosition(position =>{
             //alert(Object.getOwnPropertyNames(position.coords));
             //alert(that.state);
-            //alert(position);
+            alert(position);
             that.setState(
                 {
                     myPosition: position
