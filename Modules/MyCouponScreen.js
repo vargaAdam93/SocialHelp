@@ -5,7 +5,7 @@ import {
 
 import {Icon, Button, Container, Header,Content, Left} from 'native-base'
 
-class LoginScreen extends Component {
+class MyCouponScreen extends Component {
     static navigationOptions = {
         drawerIcon: (<Icon name='settings'/>)
     };
@@ -26,10 +26,10 @@ class LoginScreen extends Component {
                     alignItems:'center',
                     justifyContent: 'center'
                 }}>
-                    <Text>Login screen</Text>
+                    <Text>My coupon screen</Text>
                 </Content>
             </Container>
         )
     }
 }
-export default LoginScreen;
+export default MyCouponScreen;

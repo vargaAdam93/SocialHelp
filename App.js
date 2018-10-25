@@ -14,7 +14,9 @@ import { Container, Content, Header,Body, Icon } from 'native-base'
 import { DrawerNavigator, DrawerItems } from 'react-navigation'
 import HomeScreen from '../FrontEnd/Modules/HomeScreen'
 import SettingsScreen from '../FrontEnd/Modules/SettingsScreen'
-
+import MyDonationScreen from '../FrontEnd/Modules/MyDonationScreen'
+import GlobalDonationScreen from '../FrontEnd/Modules/GlobalDonationScreen'
+import MyCouponScreen from '../FrontEnd/Modules/MyCouponScreen'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -52,7 +54,11 @@ const CustomDrawerContentComponenet = (props) =>(
 
 const MyApp = DrawerNavigator({
     Home:{ screen: HomeScreen },
-    Settings: {screen: SettingsScreen}
+    Settings: {screen: SettingsScreen},
+    MyDonations: {screen: MyDonationScreen},
+    GlobalDonations: {screen: GlobalDonationScreen},
+    MyCoupons: {screen: MyCouponScreen}
+
 },{
     initialRouteName: 'Home',
     contentComponent: CustomDrawerContentComponenet,

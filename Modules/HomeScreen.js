@@ -12,11 +12,12 @@ class HomeScreen extends Component {
     {
         super(props);
         this.state = {
-            logged_in: false
+            logged_in: false,
+            camera_pushed: false
         };
         this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
         this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
-
+        this.handleCameraPushed = this.handleCameraPushed.bind(this);
     }
 
     handleFacebookLogin(event)
@@ -31,6 +32,13 @@ class HomeScreen extends Component {
     {
         this.setState({
             logged_in:true
+        });
+    }
+
+    handleCameraPushed(event)
+    {
+        this.setState({
+            camera_pushed: true
         });
     }
 
@@ -72,7 +80,16 @@ class HomeScreen extends Component {
                     }}>
                         <MyMap/>
                     </Content>
+                    <View style={{
+                        flex: 1,
+                        alignItems: 'stretch',
+                        justifyContent: 'flex-end'
+                    }}>
+                        <Button title="Camera" onPress={this.handleCameraPushed}  color="#841584"
+                                accessibilityLabel="Learn more about this purple button"/>
+                    </View>
                 </Container>
+
             )
         }
     }
