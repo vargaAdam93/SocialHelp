@@ -1,10 +1,12 @@
 import React,{ Component } from 'react';
 import {
-    View, Text, StyleSheet,Button, Image
+    View, Text, StyleSheet,Button, Image, TouchableOpacity, Dimensions
 } from 'react-native';
 import MyMap from './Map';
 
-import {Icon, Container, Header, Content, Left} from 'native-base'
+import {Icon, Container, Header, Content, Left} from 'native-base';
+import { RNCamera } from "react-native-camera";
+
 
 class HomeScreen extends Component {
 
@@ -13,7 +15,9 @@ class HomeScreen extends Component {
         super(props);
         this.state = {
             logged_in: false,
-            camera_pushed: false
+            camera_pushed: false,
+            qrcode: "",
+            camera: ""
         };
         this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
         this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
@@ -42,13 +46,54 @@ class HomeScreen extends Component {
         });
     }
 
+    onBarCodeRead = e => {
+        this.setState({ qrcode: e.data });
+    };
+
 
     static navigationOptions = {
         drawerIcon: (<Icon name='ios-home'/>)
     };
-    render()
-    {
+
+    takePicture = async function() {
+        if (this.camera) {
+            const options = { quality: 0.5, base64: true };
+            const data = await this.camera.takePictureAsync(options);
+            console.log(data.uri);
+        }
+    };
+
+    render(){
         //alert(this.state.logged_in);
+        if(this.state.camera_pushed === true)
+        {
+            return(
+                <View style={styles_map.container}>
+                    <RNCamera
+                        ref={ref => {
+                            this.camera = ref;
+                        }}
+                        style = {styles_map.preview}
+                        type={RNCamera.Constants.Type.back}
+                        flashMode={RNCamera.Constants.FlashMode.off}
+                        permissionDialogTitle={'Permission to use camera'}
+                        permissionDialogMessage={'We need your permission to use your camera phone'}
+                        onGoogleVisionBarcodesDetected={({ barcodes }) => {
+                            alert(barcodes)
+                        }}
+                    />
+                    <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
+                        <TouchableOpacity
+                            onPress={this.takePicture.bind(this)}
+                            style = {styles_map.capture}
+                        >
+                            <Text style={{fontSize: 14}}> SNAP </Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            );
+        }
+
         if(this.state.logged_in === false)
         {
             return(
@@ -104,6 +149,20 @@ const styles_map = StyleSheet.create({
         right: 0,
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 15,
+        paddingHorizontal: 20,
+        alignSelf: 'center',
+        margin: 20
     }
 });
 export default HomeScreen;
