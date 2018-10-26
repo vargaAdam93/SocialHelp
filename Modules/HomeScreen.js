@@ -5,7 +5,7 @@ import {
 import MyMap from './Map';
 
 import {Icon, Container, Header, Content, Left} from 'native-base';
-import { RNCamera } from "react-native-camera";
+import Camera from "react-native-camera";
 
 
 class HomeScreen extends Component {
@@ -16,8 +16,7 @@ class HomeScreen extends Component {
         this.state = {
             logged_in: false,
             camera_pushed: false,
-            qrcode: "",
-            camera: ""
+            qrcode: ''
         };
         this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
         this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
@@ -68,28 +67,17 @@ class HomeScreen extends Component {
         if(this.state.camera_pushed === true)
         {
             return(
-                <View style={styles_map.container}>
-                    <RNCamera
-                        ref={ref => {
-                            this.camera = ref;
-                        }}
-                        style = {styles_map.preview}
-                        type={RNCamera.Constants.Type.back}
-                        flashMode={RNCamera.Constants.FlashMode.off}
-                        permissionDialogTitle={'Permission to use camera'}
-                        permissionDialogMessage={'We need your permission to use your camera phone'}
-                        onGoogleVisionBarcodesDetected={({ barcodes }) => {
-                            alert(barcodes)
-                        }}
-                    />
-                    <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
-                        <TouchableOpacity
-                            onPress={this.takePicture.bind(this)}
-                            style = {styles_map.capture}
-                        >
-                            <Text style={{fontSize: 14}}> SNAP </Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={styles_map.cam_container}>
+                    < Camera style={styles_map.preview}
+                             aspect={Camera.constants.Aspect.fill}
+                             onBarCodeRead={this.onBarCodeRead}
+                             ref={cam => this.camera = cam}
+                    >
+                        <Text style={{
+                            backgroundColor: 'white'
+                        }}>{this.state.qrcode}</Text>
+                    </Camera>
+
                 </View>
             );
         }
@@ -149,6 +137,10 @@ const styles_map = StyleSheet.create({
         right: 0,
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    cam_container: {
+        flex: 1,
+        flexDirection: 'row',
     },
     preview: {
         flex: 1,
