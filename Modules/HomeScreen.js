@@ -7,6 +7,7 @@ import MyMap from './Map';
 import {Icon, Container, Header, Content, Left} from 'native-base';
 import Camera from "react-native-camera";
 
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
 class HomeScreen extends Component {
 
@@ -46,6 +47,7 @@ class HomeScreen extends Component {
     }
 
     onBarCodeRead = e => {
+        alert(e.data);
         this.setState({ qrcode: e.data });
     };
 
@@ -68,15 +70,8 @@ class HomeScreen extends Component {
         {
             return(
                 <View style={styles_map.cam_container}>
-                    < Camera style={styles_map.preview}
-                             aspect={Camera.constants.Aspect.fill}
-                             onBarCodeRead={this.onBarCodeRead}
-                             ref={cam => this.camera = cam}
-                    >
-                        <Text style={{
-                            backgroundColor: 'white'
-                        }}>{this.state.qrcode}</Text>
-                    </Camera>
+                    <QRCodeScanner
+                        onRead={this.onBarCodeRead}/>
 
                 </View>
             );
