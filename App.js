@@ -12,11 +12,11 @@ import { Container, Content, Header,Body, Icon } from 'native-base'
 
 
 import { DrawerNavigator, DrawerItems } from 'react-navigation'
-import HomeScreen from '../FrontEnd/Modules/HomeScreen'
-import SettingsScreen from '../FrontEnd/Modules/SettingsScreen'
-import MyDonationScreen from '../FrontEnd/Modules/MyDonationScreen'
-import GlobalDonationScreen from '../FrontEnd/Modules/GlobalDonationScreen'
-import MyCouponScreen from '../FrontEnd/Modules/MyCouponScreen'
+import HomeScreen from './Modules/HomeScreen'
+import SettingsScreen from './Modules/SettingsScreen'
+import MyDonationScreen from './Modules/MyDonationScreen'
+import GlobalDonationScreen from './Modules/GlobalDonationScreen'
+import MyCouponScreen from './Modules/MyCouponScreen'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
