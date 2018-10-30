@@ -1,10 +1,10 @@
 import React,{ Component } from 'react';
 import {
-    View, Text, StyleSheet,Button, Image, TouchableOpacity, Dimensions
+    View, Text, StyleSheet,Button, Image, TouchableOpacity, Dimensions,TouchableHighlight
 } from 'react-native';
 import MyMap from './Map';
 
-import {Icon, Container, Header, Content, Left} from 'native-base';
+import {Container, Header, Content, Left} from 'native-base';
 import Camera from "react-native-camera";
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -53,7 +53,7 @@ class HomeScreen extends Component {
 
 
     static navigationOptions = {
-        drawerIcon: (<Icon name='ios-home'/>)
+        drawerIcon: (<Text></Text>)
     };
 
     takePicture = async function() {
@@ -95,11 +95,14 @@ class HomeScreen extends Component {
             return (
                 <Container>
                     <Header>
-                        <Left>
-                            <Icon name="ios-menu"
-                                  onPress={() => this.props.navigation.openDrawer()}
-                            />
-                        </Left>
+                        <Header>
+                            <TouchableHighlight
+                                style={styles_map.button}
+                                onPress={()=> this.props.navigation.openDrawer()}
+                            >
+                                <Text>Menu</Text>
+                            </TouchableHighlight>
+                        </Header>
                     </Header>
                     <Content contentContainerStyle={{
                         flex: 1,
@@ -150,6 +153,11 @@ const styles_map = StyleSheet.create({
         paddingHorizontal: 20,
         alignSelf: 'center',
         margin: 20
-    }
+    },
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#DDDDDD',
+        padding: 10
+    },
 });
 export default HomeScreen;

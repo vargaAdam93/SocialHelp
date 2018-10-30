@@ -1,13 +1,13 @@
 import React,{ Component } from 'react';
 import {
-    View, Text, StyleSheet
+    View, Text, StyleSheet,TouchableHighlight
 } from 'react-native';
 
-import {Icon, Button, Container, Header,Content, Left} from 'native-base'
+import { Button, Container, Header,Content, Left} from 'native-base'
 
 class MyDonationScreen extends Component {
     static navigationOptions = {
-        drawerIcon: (<Icon name='card'/>)
+        drawerIcon: (<Text></Text>)
     };
 
     render()
@@ -15,11 +15,12 @@ class MyDonationScreen extends Component {
         return(
             <Container>
                 <Header>
-                    <Left>
-                        <Icon name="ios-menu"
-                              onPress={()=> this.props.navigation.openDrawer()}
-                        />
-                    </Left>
+                    <TouchableHighlight
+                        style={styles.button}
+                        onPress={()=> this.props.navigation.openDrawer()}
+                    >
+                        <Text>Menu</Text>
+                    </TouchableHighlight>
                 </Header>
                 <Content contentContainerStyle={{
                     flex:1,
@@ -32,4 +33,11 @@ class MyDonationScreen extends Component {
         )
     }
 }
+const styles = StyleSheet.create({
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#DDDDDD',
+        padding: 10
+    },
+});
 export default MyDonationScreen;
