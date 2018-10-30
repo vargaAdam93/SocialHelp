@@ -10,7 +10,15 @@ export default class MyMap extends Component{
             markers: [{
                 latlng: { latitude: 1.29027, longitude:103.85195},
                 title: 'Singapore',
-                description: 'jó'}],
+                description: 'Fintech Festival catering'},
+                {
+                    latlng: { latitude: 1.2898, longitude:103.8632},
+                    title: 'Singapore',
+                    description: 'Singapore Flyer'},
+                {
+                    latlng: { latitude: 1.33375199832 , longitude: 103.955354512},
+                    title: 'Singapore EXPO',
+                    description: 'Singapore EXPO Convention and Exhibition Center '}],
             myPosition: '',
             latitude: 0,
             longitude: 0,
@@ -49,7 +57,7 @@ export default class MyMap extends Component{
                     myPosition: position
                 }
             );
-        }, err => {console.log(err)})
+        }, err => {alert(err)})
     }
 
     getMapRegion = () =>({

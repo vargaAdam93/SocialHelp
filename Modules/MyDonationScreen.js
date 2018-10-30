@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {
-    View, Text, StyleSheet,TouchableHighlight
+    View, Text, StyleSheet,TouchableHighlight, Alert
 } from 'react-native';
 
 import { Button, Container, Header,Content, Left} from 'native-base'
@@ -10,8 +10,19 @@ class MyDonationScreen extends Component {
         drawerIcon: (<Text></Text>)
     };
 
+    shareFacebook= ()=>({
+        //TODO: Share on Facebook
+    });
     render()
     {
+        Alert.alert(
+            "Your donation has arrived",
+            "Congratulation! Your previous donation has arrived at its destination.",
+            [
+                {text: "Ok", onPress: () => console.log("OK pressed") },
+                {text: "Share it on Facebook", onPress: this.shareFacebook()}
+            ]
+        );
         return(
             <Container>
                 <Header>
@@ -27,7 +38,7 @@ class MyDonationScreen extends Component {
                     alignItems:'center',
                     justifyContent: 'center'
                 }}>
-                    <Text>My donation</Text>
+                    <Text>My previous and awaiting donations</Text>
                 </Content>
             </Container>
         )

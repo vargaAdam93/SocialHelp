@@ -22,6 +22,7 @@ class HomeScreen extends Component {
         this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
         this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
         this.handleCameraPushed = this.handleCameraPushed.bind(this);
+        this.handleCameraCancelPushed = this.handleCameraCancelPushed.bind(this);
     }
 
     handleFacebookLogin(event)
@@ -42,6 +43,13 @@ class HomeScreen extends Component {
     {
         this.setState({
             camera_pushed: true
+        });
+    }
+
+    handleCameraCancelPushed(event)
+    {
+        this.setState({
+            camera_pushed: false
         });
     }
 
@@ -81,14 +89,16 @@ class HomeScreen extends Component {
                     </Header>
                     <Content contentContainerStyle={{
                         flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center'
+                        alignItems: 'stretch',
+                        justifyContent: 'flex-end'
                     }}>
                         <View style={styles_map.cam_container}>
                             <QRCodeScanner
                                 onRead={this.onBarCodeRead}/>
 
                         </View>
+                        <Button title="Cancel" onPress={this.handleCameraCancelPushed}  color="#841584"
+                                accessibilityLabel="Learn more about this purple button"/>
                     </Content>
                 </Container>
 
