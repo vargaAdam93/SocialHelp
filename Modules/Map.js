@@ -8,32 +8,60 @@ export default class MyMap extends Component{
         super(props);
         this.state = {
             markers: [{
-                latlng: { latitude: 47.09327, longitude:17.91149},
-                title: 'Alma',
+                latlng: { latitude: 1.29027, longitude:103.85195},
+                title: 'Singapore',
                 description: 'jó'}],
-            myPosition: ''
+            myPosition: '',
+            latitude: 0,
+            longitude: 0,
+            prevLatLong: {}
         }
     }
 
     componentDidMount()
     {
-        var that = this;
+        this.watchID = navigator.geolocation.watchPosition(
+            position => {
+                const { latitude, longitude } = position.coords;
+                const old_lat = this.state.latitude;
+                const old_long = this.state.longitude;
+                const oldCoordinate = {
+                    old_lat,
+                    old_long
+                };
+                this.setState({
+                    latitude,
+                    longitude,
+                    prevLatLng: oldCoordinate,
+                    myPosition: position
+                })
+            },
+            error => alert(error),
+            { timeout: 20000, maximumAge: 1000}
+        );
         navigator.geolocation.getCurrentPosition(position =>{
-            //alert(Object.getOwnPropertyNames(position.coords));
-            //alert(that.state);
-            alert(position);
-            that.setState(
+
+            const {latitude, longitude} = position.coords;
+            this.setState(
                 {
+                    latitude,
+                    longitude,
                     myPosition: position
                 }
             );
         }, err => {console.log(err)})
     }
 
+    getMapRegion = () =>({
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1
+    });
     render() {
         if (this.state.myPosition === '') {
             return(
-                <View style={styles_map.container}>
+                <View style={styles_map.loading_text}>
                     <Text>Loading GPS location</Text>
                 </View>
             )
@@ -45,16 +73,14 @@ export default class MyMap extends Component{
             return (
                 <View style={styles_map.container}>
                     <MapView style={styles_map.map}
-                             region={{
-                                 latitude: 47.09327,
-                                 longitude: 17.91149,
-                                 latitudeDelta: 0.1,
-                                 longitudeDelta: 0.1
-                             }}>
+                             region={this.getMapRegion()}
+                             showsUsetLocation={true}
+                             followsUserLocation={true}
+                             loadingEnabled={true}>
                         <Marker
                             coordinate={myCoord}
                             pinColor={"green"}
-
+                            title = "My position"
                         />
                         {this.state.markers.map(marker => (
                             <Marker
@@ -78,6 +104,11 @@ const styles_map = StyleSheet.create({
         right:0,
         justifyContent: 'flex-end',
         alignItems: 'center',
+    },
+    loading_text: {
+        flex:1,
+        alignItems:'center',
+        justifyContent: 'center'
     },
     map:{
         position: 'absolute',

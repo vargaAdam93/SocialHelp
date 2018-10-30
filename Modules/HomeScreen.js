@@ -26,7 +26,6 @@ class HomeScreen extends Component {
 
     handleFacebookLogin(event)
     {
-        alert("button pushed");
         this.setState({
             logged_in: true
         });
@@ -69,11 +68,30 @@ class HomeScreen extends Component {
         if(this.state.camera_pushed === true)
         {
             return(
-                <View style={styles_map.cam_container}>
-                    <QRCodeScanner
-                        onRead={this.onBarCodeRead}/>
+                <Container>
+                    <Header>
+                        <Header>
+                            <TouchableHighlight
+                                style={styles_map.button}
+                                onPress={()=> this.props.navigation.openDrawer()}
+                            >
+                                <Text>Menu</Text>
+                            </TouchableHighlight>
+                        </Header>
+                    </Header>
+                    <Content contentContainerStyle={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <View style={styles_map.cam_container}>
+                            <QRCodeScanner
+                                onRead={this.onBarCodeRead}/>
 
-                </View>
+                        </View>
+                    </Content>
+                </Container>
+
             );
         }
 
@@ -106,19 +124,20 @@ class HomeScreen extends Component {
                     </Header>
                     <Content contentContainerStyle={{
                         flex: 1,
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}>
-                        <MyMap/>
-                    </Content>
-                    <View style={{
-                        flex: 1,
                         alignItems: 'stretch',
                         justifyContent: 'flex-end'
                     }}>
-                        <Button title="Camera" onPress={this.handleCameraPushed}  color="#841584"
-                                accessibilityLabel="Learn more about this purple button"/>
-                    </View>
+                        <MyMap/>
+                        <View style={{
+                            flex: 1,
+                            alignItems: 'stretch',
+                            justifyContent: 'flex-end'
+                        }}>
+                            <Button title="Camera" onPress={this.handleCameraPushed}  color="#841584"
+                                    accessibilityLabel="Learn more about this purple button"/>
+                        </View>
+                    </Content>
+
                 </Container>
 
             )
