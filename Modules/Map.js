@@ -63,8 +63,8 @@ export default class MyMap extends Component{
     getMapRegion = () =>({
         latitude: this.state.latitude,
         longitude: this.state.longitude,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01
     });
     render() {
         if (this.state.myPosition === '') {
