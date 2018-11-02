@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {
-    View, Text, StyleSheet,TouchableHighlight, Alert
+    View, Text, StyleSheet,TouchableHighlight, Alert, Share
 } from 'react-native';
 
 import { Button, Container, Header,Content, Left} from 'native-base'
@@ -9,18 +9,30 @@ class MyDonationScreen extends Component {
     static navigationOptions = {
         drawerIcon: (<Text></Text>)
     };
+    constructor(props) {
+        super(props);
+        this.shareFacebook = this.shareFacebook.bind(this);
+    }
 
-    shareFacebook= ()=>({
-        //TODO: Share on Facebook
-    });
+    shareFacebook() {
+        Share.share({
+        message: 'Share',
+        url: 'www.index.hu',
+        title: 'Share achievement'
+        }).then(result=> alert(result))
+    };
+
     render()
     {
+        const onSharePressHandler = () =>{
+            this.shareFacebook()
+        };
         Alert.alert(
             "Your donation has arrived",
             "Congratulation! Your previous donation has arrived at its destination.",
             [
                 {text: "Ok", onPress: () => console.log("OK pressed") },
-                {text: "Share it on Facebook", onPress: this.shareFacebook()}
+                {text: 'Share', onPress: onSharePressHandler}
             ]
         );
         return(
