@@ -150,7 +150,7 @@ const styles_map = StyleSheet.create({
         margin: 20
     },
     button: {
-        alignItems: 'center',
+        alignItems: 'flex-start',
         backgroundColor: '#DDDDDD',
         padding: 10
     },

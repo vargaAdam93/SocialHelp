@@ -35,7 +35,7 @@ class MyCouponScreen extends Component {
 }
 const styles = StyleSheet.create({
     button: {
-        alignItems: 'center',
+        alignItems: 'flex-start',
         backgroundColor: '#DDDDDD',
         padding: 10
     },
