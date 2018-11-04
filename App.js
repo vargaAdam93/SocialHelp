@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, Button} from 'react-native';
 import { Container, Content, Header,Body, Icon } from 'native-base'
 
 
@@ -28,10 +28,49 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
 
+    constructor(props)
+    {
+        super(props);
+        this.state= {
+            logged_in: false
+        };
+        this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
+        this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
+    }
+
+    handleFacebookLogin(event)
+    {
+        this.setState({
+            logged_in: true
+        });
+    }
+
+    handleGoogleLogin(event)
+    {
+        this.setState({
+            logged_in:true
+        });
+    }
+
     render() {
-        return (
-        <MyApp/>
+        if(this.state.logged_in === false)
+        {
+            return(
+                <View style={styles.container}>
+                    <Image source={require('./Modules/Pictures/slide-logo.png')} />
+
+                    <Button title="Facebook login" onPress={this.handleFacebookLogin}  color="#841584"
+                            accessibilityLabel="Learn more about this purple button"/>
+                    <Button title="Google login" onPress={this.handleGoogleLogin}  color="#841584"
+                            accessibilityLabel="Learn more about this purple button"/>
+                </View>
+            )
+        }
+        else {
+            return (
+                <MyApp/>
             );
+        }
       }
 }
 
@@ -54,10 +93,10 @@ const CustomDrawerContentComponenet = (props) =>(
 
 const MyApp = DrawerNavigator({
     Home:{ screen: HomeScreen },
-    Settings: {screen: SettingsScreen},
+    MyCoupons: {screen: MyCouponScreen},
     MyDonations: {screen: MyDonationScreen},
     GlobalDonations: {screen: GlobalDonationScreen},
-    MyCoupons: {screen: MyCouponScreen}
+    Settings: {screen: SettingsScreen}
 
 },{
     initialRouteName: 'Home',
@@ -74,6 +113,15 @@ styles = StyleSheet.create(
             height: 150,
             width:150,
             borderRadius: 75
-        }
+        },
+        container: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+        },
     }
 );

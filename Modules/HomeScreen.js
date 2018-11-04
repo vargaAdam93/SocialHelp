@@ -15,28 +15,11 @@ class HomeScreen extends Component {
     {
         super(props);
         this.state = {
-            logged_in: false,
             camera_pushed: false,
             qrcode: ''
         };
-        this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
-        this.handleGoogleLogin = this.handleGoogleLogin.bind(this);
         this.handleCameraPushed = this.handleCameraPushed.bind(this);
         this.handleCameraCancelPushed = this.handleCameraCancelPushed.bind(this);
-    }
-
-    handleFacebookLogin(event)
-    {
-        this.setState({
-            logged_in: true
-        });
-    }
-
-    handleGoogleLogin(event)
-    {
-        this.setState({
-            logged_in:true
-        });
     }
 
     handleCameraPushed(event)
@@ -104,54 +87,37 @@ class HomeScreen extends Component {
 
             );
         }
-
-        if(this.state.logged_in === false)
-        {
-            return(
-                <View style={styles_map.container}>
-                    <Image source={require('./Pictures/slide-logo.png')} />
-
-                    <Button title="Facebook login" onPress={this.handleFacebookLogin}  color="#841584"
-                            accessibilityLabel="Learn more about this purple button"/>
-                    <Button title="Google login" onPress={this.handleGoogleLogin}  color="#841584"
-                            accessibilityLabel="Learn more about this purple button"/>
-                </View>
-            )
-        }
-        else {
-
-            return (
-                <Container>
+        return (
+            <Container>
+                <Header>
                     <Header>
-                        <Header>
-                            <TouchableHighlight
-                                style={styles_map.button}
-                                onPress={()=> this.props.navigation.openDrawer()}
-                            >
-                                <Text>Menu</Text>
-                            </TouchableHighlight>
-                        </Header>
+                        <TouchableHighlight
+                            style={styles_map.button}
+                            onPress={()=> this.props.navigation.openDrawer()}
+                        >
+                            <Text>Menu</Text>
+                        </TouchableHighlight>
                     </Header>
-                    <Content contentContainerStyle={{
+                </Header>
+                <Content contentContainerStyle={{
+                    flex: 1,
+                    alignItems: 'stretch',
+                    justifyContent: 'flex-end'
+                }}>
+                    <MyMap/>
+                    <View style={{
                         flex: 1,
                         alignItems: 'stretch',
                         justifyContent: 'flex-end'
                     }}>
-                        <MyMap/>
-                        <View style={{
-                            flex: 1,
-                            alignItems: 'stretch',
-                            justifyContent: 'flex-end'
-                        }}>
-                            <Button title="Camera" onPress={this.handleCameraPushed}  color="#841584"
-                                    accessibilityLabel="Learn more about this purple button"/>
-                        </View>
-                    </Content>
+                        <Button title="Camera" onPress={this.handleCameraPushed}  color="#841584"
+                                accessibilityLabel="Learn more about this purple button"/>
+                    </View>
+                </Content>
 
-                </Container>
+            </Container>
 
-            )
-        }
+        )
     }
 }
 
