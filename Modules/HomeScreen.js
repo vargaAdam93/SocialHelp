@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import MyMap from './Map';
 
-import {Container, Header, Content, Left} from 'native-base';
+import {Container, Header, Content, Left, Icon, Body} from 'native-base';
 import Camera from "react-native-camera";
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -61,14 +61,12 @@ class HomeScreen extends Component {
             return(
                 <Container>
                     <Header>
-                        <Header>
-                            <TouchableHighlight
-                                style={styles_map.button}
-                                onPress={()=> this.props.navigation.openDrawer()}
-                            >
-                                <Text>Menu</Text>
-                            </TouchableHighlight>
-                        </Header>
+                        <Left>
+                            <Icon name="ios-menu"
+                                  onPress={()=> this.props.navigation.openDrawer()}
+                            />
+                        </Left>
+                        <Body/>
                     </Header>
                     <Content contentContainerStyle={{
                         flex: 1,
@@ -90,14 +88,12 @@ class HomeScreen extends Component {
         return (
             <Container>
                 <Header>
-                    <Header>
-                        <TouchableHighlight
-                            style={styles_map.button}
-                            onPress={()=> this.props.navigation.openDrawer()}
-                        >
-                            <Text>Menu</Text>
-                        </TouchableHighlight>
-                    </Header>
+                        <Left>
+                            <Icon name="ios-menu"
+                                  onPress={()=> this.props.navigation.openDrawer()}
+                            />
+                        </Left>
+                    <Body/>
                 </Header>
                 <Content contentContainerStyle={{
                     flex: 1,

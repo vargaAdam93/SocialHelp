@@ -3,7 +3,7 @@ import {
     View, Text, StyleSheet,TouchableHighlight, Alert, Share
 } from 'react-native';
 
-import { Button, Container, Header,Content, Left} from 'native-base'
+import { Button, Container, Header,Content, Left, Body, Icon} from 'native-base'
 
 class MyDonationScreen extends Component {
     static navigationOptions = {
@@ -38,12 +38,13 @@ class MyDonationScreen extends Component {
         return(
             <Container>
                 <Header>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={()=> this.props.navigation.openDrawer()}
-                    >
-                        <Text>Menu</Text>
-                    </TouchableHighlight>
+                    <Left>
+                        <Icon name="ios-menu"
+                              onPress={()=> this.props.navigation.openDrawer()
+                              }
+                        />
+                    </Left>
+                    <Body/>
                 </Header>
                 <Content contentContainerStyle={{
                     flex:1,
@@ -61,6 +62,6 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         backgroundColor: '#DDDDDD',
         padding: 10
-    },
+    }
 });
 export default MyDonationScreen;

@@ -3,7 +3,7 @@ import {
     View, Text, StyleSheet,TouchableHighlight
 } from 'react-native';
 
-import { Button, Container, Header,Content, Left} from 'native-base'
+import { Button, Container, Header,Content, Left, Icon, Body} from 'native-base';
 
 class MyCouponScreen extends Component {
     static navigationOptions = {
@@ -15,12 +15,12 @@ class MyCouponScreen extends Component {
         return(
             <Container>
                 <Header>
-                    <TouchableHighlight
-                        style={styles.button}
-                        onPress={()=> this.props.navigation.openDrawer()}
-                    >
-                        <Text>Menu</Text>
-                    </TouchableHighlight>
+                    <Left>
+                        <Icon name="ios-menu"
+                              onPress={()=> this.props.navigation.openDrawer()}
+                        />
+                    </Left>
+                    <Body/>
                 </Header>
                 <Content contentContainerStyle={{
                     flex:1,
@@ -35,7 +35,7 @@ class MyCouponScreen extends Component {
 }
 const styles = StyleSheet.create({
     button: {
-        alignItems: 'flex-start',
+        alignItems: 'center',
         backgroundColor: '#DDDDDD',
         padding: 10
     },
