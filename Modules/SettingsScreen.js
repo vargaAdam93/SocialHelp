@@ -3,7 +3,7 @@ import {
     View, Text, StyleSheet,TouchableHighlight
 } from 'react-native';
 
-import { Button, Container, Header,Content, Left, Icon, Body} from 'native-base'
+import { Button, Container, Header,Content, Left, Icon, Body, Title} from 'native-base'
 
 class SettingsScreen extends Component {
     static navigationOptions = {
@@ -20,7 +20,11 @@ class SettingsScreen extends Component {
                               onPress={()=> this.props.navigation.openDrawer()}
                         />
                     </Left>
-                    <Body/>
+                    <Body>
+                        <Title>
+                            Settings
+                        </Title>
+                    </Body>
                 </Header>
                 <Content contentContainerStyle={{
                     flex:1,

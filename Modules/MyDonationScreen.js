@@ -1,9 +1,9 @@
 import React,{ Component } from 'react';
 import {
-    View, Text, StyleSheet,TouchableHighlight, Alert, Share
+    View, Text, StyleSheet,TouchableHighlight, Alert, Share,FlatList
 } from 'react-native';
 
-import { Button, Container, Header,Content, Left, Body, Icon} from 'native-base'
+import { Button, Container, Header,Content, Left, Body, Icon, Title} from 'native-base'
 
 class MyDonationScreen extends Component {
     static navigationOptions = {
@@ -44,14 +44,30 @@ class MyDonationScreen extends Component {
                               }
                         />
                     </Left>
-                    <Body/>
+                    <Body>
+                        <Title>
+                            My Donations
+                        </Title>
+                    </Body>
                 </Header>
                 <Content contentContainerStyle={{
                     flex:1,
                     alignItems:'center',
                     justifyContent: 'center'
                 }}>
-                    <Text>My previous and awaiting donations</Text>
+                    <FlatList
+                        data={[
+                            {key: 'Place name 1', date:"2018-09-12", donation: '500 HUF'},
+                            {key: 'Place name 2', date:"2018-09-13", donation: '800 HUF'},
+                            {key: 'Place name 1', date:"2018-09-14", donation: '600 HUF'},
+                        ]}
+                        renderItem={({item}) => <Text style={styles.item}>
+                                                    In {item.key} at {item.date}:{"\n"}
+                                                    <Text style={{color: 'red'}}>
+                                                        {item.donation}
+                                                    </Text>.
+                                                </Text>}
+                    />
                 </Content>
             </Container>
         )
@@ -62,6 +78,11 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         backgroundColor: '#DDDDDD',
         padding: 10
-    }
+    },
+    item: {
+        padding: 0,
+        fontSize: 14,
+        height: 64,
+    },
 });
 export default MyDonationScreen;
