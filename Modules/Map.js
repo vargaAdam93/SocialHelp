@@ -28,6 +28,17 @@ export default class MyMap extends Component{
 
     componentDidMount()
     {
+        navigator.geolocation.getCurrentPosition(position =>{
+
+            const {latitude, longitude} = position.coords;
+            this.setState(
+                {
+                    latitude,
+                    longitude,
+                    myPosition: position
+                }
+            );
+        }, err => {console.log('Hiba ' + err.message)});
         this.watchID = navigator.geolocation.watchPosition(
             position => {
                 const { latitude, longitude } = position.coords;
@@ -44,20 +55,10 @@ export default class MyMap extends Component{
                     myPosition: position
                 })
             },
-            error => alert(error),
+            error => console.log('Hiba ' + error.message),
             { timeout: 20000, maximumAge: 1000}
         );
-        navigator.geolocation.getCurrentPosition(position =>{
 
-            const {latitude, longitude} = position.coords;
-            this.setState(
-                {
-                    latitude,
-                    longitude,
-                    myPosition: position
-                }
-            );
-        }, err => {alert(err)})
     }
 
     getMapRegion = () =>({
