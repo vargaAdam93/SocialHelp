@@ -37,8 +37,10 @@ class HomeScreen extends Component {
     }
 
     onBarCodeRead = e => {
-        alert(e.data);
-        this.setState({ qrcode: e.data });
+        alert('Cupon with ' + e.data + 'succesfully readed! Thank you for your donation!!!');
+        this.setState({ qrcode: e.data,
+                        camera_pushed: false
+        });
     };
 
 

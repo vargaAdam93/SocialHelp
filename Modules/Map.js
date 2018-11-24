@@ -1,24 +1,14 @@
 import React,{Component} from 'react';
 import {AppRegistry, Platform, StyleSheet, Text, View, Dimensions, PermissionsAndroid} from 'react-native';
 import MapView,{ Marker} from 'react-native-maps';
+import Frei_coord from "./Frei_coord";
 
 export default class MyMap extends Component{
     constructor(props)
     {
         super(props);
         this.state = {
-            markers: [{
-                latlng: { latitude: 1.29027, longitude:103.85195},
-                title: 'Singapore',
-                description: 'Fintech Festival catering'},
-                {
-                    latlng: { latitude: 1.2898, longitude:103.8632},
-                    title: 'Singapore',
-                    description: 'Singapore Flyer'},
-                {
-                    latlng: { latitude: 1.33375199832 , longitude: 103.955354512},
-                    title: 'Singapore EXPO',
-                    description: 'Singapore EXPO Convention and Exhibition Center '}],
+            markers: Frei_coord,
             myPosition: '',
             prevLatLong: {},
             permissionState: false,
@@ -29,7 +19,7 @@ export default class MyMap extends Component{
     }
 
     componentDidMount() {
-        Platform.OS === 'android' && Platform.Version >= 23 ? this.requestMapPermission() : this.requestMap()
+        Platform.OS === 'android' && Platform.Version >= 22 ? this.requestMapPermission() : this.requestMap()
     }
 
     /*componentDidMount()
