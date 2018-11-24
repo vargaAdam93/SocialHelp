@@ -37,10 +37,19 @@ class HomeScreen extends Component {
     }
 
     onBarCodeRead = e => {
-        alert('Cupon with ' + e.data + 'succesfully readed! Thank you for your donation!!!');
+        alert('Cupon with ' + e.data + ' succesfully readed! \n Thank you for your donation!!!');
         this.setState({ qrcode: e.data,
                         camera_pushed: false
         });
+    };
+
+    ShowAlertWithDelay=()=>{
+
+        setTimeout(function(){
+            alert('Your donation has arrived to Red Cross!')
+        }, 10000);
+
+
     };
 
 
@@ -90,6 +99,10 @@ class HomeScreen extends Component {
                 </Container>
 
             );
+        }
+        if(this.state.qrcode !=="")
+        {
+            this.ShowAlertWithDelay();
         }
         return (
             <Container>
