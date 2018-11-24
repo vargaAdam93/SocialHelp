@@ -8,6 +8,7 @@ import {Container, Header, Content, Left, Icon, Body, Title} from 'native-base';
 import Camera from "react-native-camera";
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import QR_decode from './QR_decode';
 
 class HomeScreen extends Component {
 
@@ -37,19 +38,26 @@ class HomeScreen extends Component {
     }
 
     onBarCodeRead = e => {
-        alert('Cupon with ' + e.data + ' succesfully readed! \n Thank you for your donation!!!');
+        alert('Cupon with ' + e.data + ' succesfully read! \n Thank you for your donation!!!');
         this.setState({ qrcode: e.data,
                         camera_pushed: false
         });
     };
 
-    ShowAlertWithDelay=()=>{
-
-        setTimeout(function(){
-            alert('Your donation has arrived to Red Cross!')
-        }, 10000);
-
-
+    ShowAlertWithDelay=() =>{
+        let that = this;
+        setTimeout(function () {
+            let org_and_donation = {};
+            for(let i in QR_decode)
+            {
+                if(QR_decode[i].key === that.state.qrcode )
+                {
+                    org_and_donation = QR_decode[i].value;
+                }
+            }
+            alert('Your ' + org_and_donation.donation + '  donation has arrived to ' +org_and_donation.to + ' !');
+            that.setState({qrcode: ""});
+        },10000);
     };
 
 
