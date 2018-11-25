@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {
-    View, Text, StyleSheet,Button, Image, TouchableOpacity, Dimensions,TouchableHighlight
+    View, Text, StyleSheet, Button, Image, TouchableOpacity, Dimensions,TouchableHighlight
 } from 'react-native';
 import MyMap from './Map';
 

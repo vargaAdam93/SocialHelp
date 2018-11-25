@@ -120,7 +120,7 @@ export default class MyMap extends Component{
                 {
                     this.state.permissionState === true ?
                         <MapView
-                            showsUsetLocation={true}
+                            showsUserLocation={true}
                             followsUserLocation={true}
                             loadingEnabled={true}
                             style={styles_map.map}
@@ -130,13 +130,6 @@ export default class MyMap extends Component{
                                 latitudeDelta: 0.0922,
                                 longitudeDelta: 0.0421
                             }}>
-                            <MapView.Marker
-                                coordinate={{
-                                    latitude: (this.state.latitude + 0.00000),
-                                    longitude: (this.state.longitude + 0.00000),
-                                }}
-                                pinColor={"green"}
-                                title = "My position"/>
                             {this.state.markers.map(marker => (
                                 <MapView.Marker
                                     coordinate={marker.latlng}
